@@ -3,6 +3,8 @@
     2. Register and npm install 
     3. Create firebase.init.js copy initialize file and import auth default
     4. Firebase settings > Authentication > Enable
+    5. Create login, Signup component & setup route
+    6. Attach form field handler & form submit handler
 */
 
 
