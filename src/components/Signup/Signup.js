@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import './Signup.css'
 import { Link } from 'react-router-dom';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+
+    const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
 
     const handleEmailBlur = event => {
         setEmail(event.target.value);
@@ -25,6 +29,10 @@ const Signup = () => {
         if (password !== confirmPassword) {
             setError("Password didn't matched");
         }
+        if (password < 6) {
+            setError("Password must contain at least six characters")
+        }
+        createUserWithEmailAndPassword(email, password);
     }
 
     return (
