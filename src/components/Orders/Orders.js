@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, Navigate, useLoaderData, useNavigate } from 'react-router-dom';
 import { deleteShoppingCart, removeFromDb } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import ReviewItem from '../ReviewItem/ReviewItem';
+
+const navigate = useNavigate;
 
 const Orders = () => {
     const { initialCart } = useLoaderData();  // { products: products, initialCart: initialCart }
@@ -14,10 +16,15 @@ const Orders = () => {
         removeFromDb(id);
     }
 
-    const clearCart = () =>{
+    const clearCart = () => {
         setCart([]);
         deleteShoppingCart();
     }
+
+    const checkout = () => {
+
+    }
+
 
     return (
         <div className='shop-container'>
@@ -33,9 +40,18 @@ const Orders = () => {
                     cart.length === 0 && <h2>No Items for Review. Please <Link to="/">Shop more</Link></h2>
                 }
             </div>
+
+
             <div className='cart-container'>
-                <Cart clearCart={clearCart} cart={cart}></Cart>
+                <Cart cart={cart}>
+                    <button onClick={() => navigate('/shipment')}>Proceed Checkout</button>
+                </Cart>
             </div>
+            {/* <div className='cart-container'>
+                <Cart clearCart={clearCart} cart={cart}></Cart>
+            </div> */}
+
+
         </div>
     );
 };

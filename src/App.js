@@ -9,6 +9,7 @@ import { productsAndCartLoader } from './loaders/productsAndCartLoader';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import RequireAuth from './components/RequireAuth/RequireAuth';
+import Shipment from './components/Shipment/Shipment';
 
 
 function App() {
@@ -36,6 +37,13 @@ function App() {
         {
           path: 'about',
           element: <About></About>
+        },
+        {
+          path: 'shipment',
+
+          element: <RequireAuth>
+            <Shipment></Shipment>
+          </RequireAuth>
         },
         {
           path: 'login',
